@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Cozy Unity Game Developer Portfolio</title>
+    <title>CafeDevPortfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -502,12 +502,32 @@
             flex-direction: column;
             gap: 0.9rem;
             transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+            cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.1);
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
             border-color: rgba(62, 183, 160, 0.55);
+        }
+
+        .project-tag span {
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+        .project-card:hover .project-tag span {
+            animation: tag-bounce 0.45s ease-in-out infinite alternate;
+        }
+
+        @keyframes tag-bounce {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-3px) rotate(-4deg);
+            }
         }
 
         .project-thumb {
@@ -570,7 +590,7 @@
             font-size: 0.8rem;
         }
 
-        .link-inline {
+        .text-inline {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
@@ -950,7 +970,7 @@
         <section id="home" class="hero">
             <div class="hero-copy">
                 <div class="eyebrow">
-                    <span>☕</span> Cozy Unity Game Developer
+                    <span>☕</span> Cafe Unity Game Developer
                 </div>
                 <h1 class="hero-title">
                     I build <span>playful</span> &amp; <span>relaxing</span> game experiences.
@@ -965,9 +985,9 @@
                         onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
                         Play My Games 🎮
                     </button>
-                    <button class="btn-secondary">
-                        Download Portfolio <span>⬇️</span>
-                    </button>
+                    <a href="https://drive.google.com/uc?export=download&id=1gH5ZBnId2zSfQRy9ldvXrgeRwWOc16e6" class="btn-secondary" target="_blank" rel="noopener">
+                        Download My CV <span>⬇️</span>
+                    </a>
                 </div>
 
                 <div class="hero-tags">
@@ -1020,7 +1040,7 @@
                 <!-- Project 1 -->
                 <article class="project-card" data-type="pc" data-link="https://your-demo-link.com">
                     <div class="project-thumb">
-                        <div class="project-tag">🌱 Cozy Farming</div>
+                        <div class="project-tag"><span>🌱</span> Cozy Farming</div>
                         Imagine a screenshot of your farm game here.
                     </div>
                     <div class="project-body">
@@ -1033,17 +1053,17 @@
                         </div>
                     </div>
                     <div class="project-footer">
-                        <a href="#" class="link-inline">
+                        <span class="text-inline">
                             Play Demo <span>↗</span>
-                        </a>
+                        </span>
                         <span>Role: Gameplay &amp; UI</span>
                     </div>
                 </article>
 
                 <!-- Project 2 -->
-                <article class="project-card" data-type="mobile">
+                <article class="project-card" data-type="mobile" data-link="https://your-demo-link.com">
                     <div class="project-thumb" style="background: linear-gradient(135deg,#c2e9fb,#a1c4fd);">
-                        <div class="project-tag">🧩 Puzzle</div>
+                        <div class="project-tag"><span>🧩</span> Puzzle</div>
                         Placeholder for a mobile puzzle game preview.
                     </div>
                     <div class="project-body">
@@ -1056,17 +1076,17 @@
                         </div>
                     </div>
                     <div class="project-footer">
-                        <a href="#" class="link-inline">
+                        <span class="text-inline">
                             Google Play (soon) <span>☕</span>
-                        </a>
+                        </span>
                         <span>Role: Systems &amp; Tools</span>
                     </div>
                 </article>
 
                 <!-- Project 3 -->
-                <article class="project-card" data-type="prototype">
+                <article class="project-card" data-type="prototype" data-link="https://your-demo-link.com">
                     <div class="project-thumb" style="background: linear-gradient(135deg,#fbc2eb,#a18cd1);">
-                        <div class="project-tag">🎮 Prototype</div>
+                        <div class="project-tag"><span>🎮</span> Prototype</div>
                         Concept art / prototype for a narrative café sim.
                     </div>
                     <div class="project-body">
@@ -1079,9 +1099,9 @@
                         </div>
                     </div>
                     <div class="project-footer">
-                        <a href="#" class="link-inline">
+                        <span class="text-inline">
                             View on GitHub <span>💻</span>
-                        </a>
+                        </span>
                         <span>Role: Everything</span>
                     </div>
                 </article>
