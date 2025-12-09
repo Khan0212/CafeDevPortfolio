@@ -10,928 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #F4EFEA;
-            --bg-alt: #FFF8F1;
-            --primary: #3EB7A0;
-            --secondary: #6A5B4D;
-            --accent: #FF8686;
-            --highlight: #FEDC81;
-            --text-dark: #2C3D46;
-            --text-light: #FBF8F4;
-            --card-border: #E8E0D8;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-pill: 999px;
-            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
-            --transition-fast: 0.18s ease-out;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at 10% 30%, rgba(62, 183, 160, 0.06), transparent 60%),
-                radial-gradient(circle at 90% 70%, rgba(233, 236, 239, 0.95), transparent 60%),
-                #F4EFEA;
-            background-attachment: fixed;
-            color: #2F3A41;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: "☕";
-            position: fixed;
-            top: 10%;
-            left: 5%;
-            opacity: 0.06;
-            font-size: 6rem;
-            pointer-events: none;
-        }
-
-        body::after {
-            content: "🌿";
-            position: fixed;
-            bottom: 15%;
-            right: 7%;
-            opacity: 0.06;
-            font-size: 5rem;
-            pointer-events: none;
-        }
-
-        .soft-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle,
-                    rgba(255, 255, 255, 0.75) 0%,
-                    rgba(255, 235, 205, 0.65) 40%,
-                    rgba(255, 220, 180, 0.4) 70%,
-                    rgba(255, 220, 180, 0) 100%);
-            filter: blur(120px);
-            pointer-events: none;
-            opacity: 0.85;
-            z-index: 0;
-            animation: latte-float 18s ease-in-out infinite alternate;
-        }
-
-        .soft-glow {
-            top: -60px;
-            left: -30px;
-        }
-
-        @keyframes latte-float {
-            0% {
-                transform: translate(-10%, 0%);
-            }
-
-            100% {
-                transform: translate(15%, 10%);
-            }
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .page {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem 4rem;
-        }
-
-        /* HEADER */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(244, 239, 234, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(232, 224, 216, 0.7);
-        }
-
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--secondary);
-        }
-
-        .logo span {
-            padding: 0.25rem 0.7rem;
-            border-radius: var(--radius-pill);
-            background: var(--primary);
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a {
-            position: relative;
-            padding-bottom: 0.1rem;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            border-radius: 999px;
-            transition: width var(--transition-fast);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            padding: 0.4rem 1rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--primary);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            cursor: pointer;
-            background: rgba(62, 183, 160, 0.06);
-            transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        .nav-cta:hover {
-            background: var(--primary);
-            color: var(--text-light);
-            box-shadow: 0 8px 20px rgba(62, 183, 160, 0.45);
-            transform: translateY(-1px);
-        }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .burger span {
-            width: 20px;
-            height: 2px;
-            background: var(--secondary);
-            border-radius: 999px;
-        }
-
-        /* HERO */
-        section {
-            padding: 4rem 0;
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .eyebrow {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--secondary);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .eyebrow span {
-            font-size: 1rem;
-        }
-
-        .hero-title {
-            font-size: clamp(2.4rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-top: 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero-title span {
-            color: var(--primary);
-        }
-
-        .hero-subtitle {
-            font-size: 0.98rem;
-            max-width: 34rem;
-            color: #4a5a63;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1.8rem;
-            margin-bottom: 1.1rem;
-        }
-
-        .btn-primary {
-            padding: 0.85rem 1.6rem;
-            border-radius: var(--radius-pill);
-            border: none;
-            background: var(--primary);
-            color: var(--text-light);
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-shadow: 0 16px 30px rgba(62, 183, 160, 0.35);
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 20px 45px rgba(62, 183, 160, 0.45);
-            opacity: 0.97;
-        }
-
-        .btn-secondary {
-            padding: 0.85rem 1.4rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--secondary);
-            background: transparent;
-            color: var(--secondary);
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-        }
-
-        .btn-secondary:hover {
-            background: var(--secondary);
-            color: var(--text-light);
-            transform: translateY(-1px);
-        }
-
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            margin-top: 0.4rem;
-        }
-
-        .tag-pill {
-            padding: 0.35rem 0.8rem;
-            border-radius: var(--radius-pill);
-            background: rgba(106, 91, 77, 0.07);
-            border: 1px solid rgba(106, 91, 77, 0.2);
-            color: #5a4c40;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hero-illustration {
-            position: relative;
-            isolation: isolate;
-        }
-
-        .hero-card {
-            background: var(--bg-alt);
-            border-radius: var(--radius-lg);
-            padding-top: 4rem;
-            padding-bottom: 4rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid var(--card-border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at top left, rgba(254, 220, 129, 0.45), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(62, 183, 160, 0.28), transparent 55%);
-            opacity: 0.9;
-            pointer-events: none;
-        }
-
-        .hero-card-inner {
-            position: relative;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1.4rem;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .coffee-mug {
-            width: 80px;
-            height: 80px;
-            border-radius: 30px;
-            background: #ffffff;
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.1rem;
-        }
-
-        .hero-card-text h3 {
-            font-size: 1.05rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .hero-card-text p {
-            font-size: 0.85rem;
-            color: #4d5a63;
-        }
-
-        .hero-floating-pill {
-            position: absolute;
-            right: -10px;
-            top: 35px;
-            padding: 0.35rem 0.9rem;
-            border-radius: var(--radius-pill);
-            background: rgba(62, 183, 160, 0.14);
-            border: 1px dashed rgba(62, 183, 160, 0.45);
-            font-size: 0.78rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .hero-floating-note {
-            position: absolute;
-            left: -10px;
-            bottom: 18px;
-            background: var(--highlight);
-            padding: 0.4rem 0.9rem;
-            border-radius: 14px;
-            font-size: 0.78rem;
-            box-shadow: 0 14px 30px rgba(254, 220, 129, 0.45);
-        }
-
-        .coffee-doodles {
-            position: absolute;
-            inset: -12px;
-            pointer-events: none;
-            opacity: 0.35;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            font-size: 1.3rem;
-            padding: 0.85rem 1.1rem;
-        }
-
-        /* SECTION TITLES */
-        .section-header {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .section-title span {
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            font-size: 0.9rem;
-            max-width: 32rem;
-            color: #55646d;
-        }
-
-        /* PROJECTS */
-        .projects {
-            margin-top: 1rem;
-        }
-
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            margin-bottom: 1.6rem;
-        }
-
-        .filter-btn {
-            border-radius: var(--radius-pill);
-            padding: 0.45rem 1.2rem;
-            border: 1px solid rgba(106, 91, 77, 0.26);
-            background: transparent;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--secondary);
-            color: var(--text-light);
-            border-color: var(--secondary);
-            transform: translateY(-1px);
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.7rem;
-        }
-
-        .project-card {
-            background: var(--bg-alt);
-            border-radius: var(--radius-lg);
-            padding: 1.35rem;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px) scale(1.1);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-            border-color: rgba(62, 183, 160, 0.55);
-        }
-
-        .project-tag span {
-            display: inline-block;
-            transition: transform 0.25s ease;
-        }
-
-        .project-card:hover .project-tag span {
-            animation: tag-bounce 0.45s ease-in-out infinite alternate;
-        }
-
-        @keyframes tag-bounce {
-            0% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            100% {
-                transform: translateY(-3px) rotate(-4deg);
-            }
-        }
-
-        .project-thumb {
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #ffe3ba, #ffb8c0);
-            height: 150px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: #ffffff;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .project-tag {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 0.75rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: var(--radius-pill);
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-        }
-
-        .project-body h3 {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .project-body p {
-            font-size: 0.8rem;
-            color: #5b6770;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            font-size: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .meta-pill {
-            padding: 0.25rem 0.7rem;
-            border-radius: 999px;
-            background: rgba(106, 91, 77, 0.05);
-            border: 1px solid rgba(106, 91, 77, 0.18);
-        }
-
-        .project-footer {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-        }
-
-        .text-inline {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        /* ABOUT */
-        .about {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 0.9rem;
-            color: #4b5a64;
-            margin-bottom: 1rem;
-        }
-
-        .about-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.6rem 1.5rem;
-            font-size: 0.86rem;
-        }
-
-        .about-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-
-        .about-list span.icon {
-            font-size: 1rem;
-        }
-
-        .about-card {
-            background: var(--bg-alt);
-            border-radius: var(--radius-lg);
-            padding: 1.8rem;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-soft);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 40px;
-            background: #ffffff;
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-small {
-            font-size: 0.8rem;
-            color: #5b6770;
-        }
-
-        .about-card::after {
-            content: "☕ dev time";
-            position: absolute;
-            right: -18px;
-            top: 26px;
-            transform: rotate(-12deg);
-            background: var(--highlight);
-            padding: 0.3rem 0.9rem;
-            border-radius: 999px;
-            font-size: 0.7rem;
-            box-shadow: 0 14px 30px rgba(254, 220, 129, 0.45);
-        }
-
-        /* CONTACT */
-        .contact {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-            gap: 3rem;
-            align-items: flex-start;
-        }
-
-        .contact-illustration {
-            background: var(--bg-alt);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            border: 1px dashed rgba(106, 91, 77, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-illustration h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-illustration p {
-            font-size: 0.9rem;
-            color: #4b5a64;
-        }
-
-        .contact-steps {
-            margin-top: 1.4rem;
-            display: grid;
-            gap: 0.65rem;
-            font-size: 0.86rem;
-        }
-
-        .contact-step {
-            display: flex;
-            gap: 0.6rem;
-            align-items: flex-start;
-        }
-
-        .contact-step span {
-            width: 22px;
-            height: 22px;
-            border-radius: 999px;
-            background: rgba(62, 183, 160, 0.14);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .contact-form-card {
-            background: var(--bg-alt);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            font-size: 0.8rem;
-        }
-
-        .form-field label {
-            color: #4b5a64;
-        }
-
-        .form-field input,
-        .form-field textarea {
-            border-radius: 12px;
-            border: 1px solid #d7cec4;
-            padding: 0.7rem 0.9rem;
-            font: inherit;
-            outline: none;
-            background: #fffdfa;
-            resize: vertical;
-            min-height: 0;
-        }
-
-        .form-field textarea {
-            min-height: 130px;
-        }
-
-        .form-field input:focus,
-        .form-field textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 1px rgba(62, 183, 160, 0.26);
-        }
-
-        .contact-note {
-            font-size: 0.8rem;
-            color: #6b757d;
-            margin-top: 0.6rem;
-        }
-
-        .form-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            color: #2F3A41;
-            padding: 0.75rem 1.3rem;
-            font-size: 0.9rem;
-            border-radius: 16px;
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 9999;
-            font-weight: 500;
-        }
-
-        .form-toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0px);
-        }
-
-        .form-toast-error {
-            background: rgba(255, 239, 239, 0.95);
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            color: #8a0000;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid rgba(232, 224, 216, 0.9);
-            padding: 1.5rem 0 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            font-size: 0.8rem;
-            color: #737f87;
-        }
-
-        .footer-links {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .socials {
-            display: flex;
-            gap: 0.6rem;
-        }
-
-        .social-pill {
-            width: 30px;
-            height: 30px;
-            border-radius: 999px;
-            background: rgba(106, 91, 77, 0.07);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background var(--transition-fast), transform var(--transition-fast);
-        }
-
-        .social-pill:hover {
-            background: var(--secondary);
-            color: var(--text-light);
-            transform: translateY(-1px);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 960px) {
-
-            .hero,
-            .about,
-            .contact {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .hero {
-                gap: 2.2rem;
-            }
-
-            .hero-illustration {
-                order: -1;
-            }
-
-            .project-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 720px) {
-            .header-inner {
-                padding-inline: 1rem;
-            }
-
-            .page {
-                padding-inline: 1rem;
-            }
-
-            .project-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .form-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            nav {
-                position: fixed;
-                inset: 56px 0 auto 0;
-                background: rgba(244, 239, 234, 0.97);
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-                border-bottom: 1px solid rgba(232, 224, 216, 0.9);
-                transform: translateY(-110%);
-                opacity: 0;
-                pointer-events: none;
-                transition: transform var(--transition-fast), opacity var(--transition-fast);
-            }
-
-            nav.open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .nav-cta {
-                align-self: stretch;
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -985,9 +65,10 @@
                         onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
                         Play My Games 🎮
                     </button>
-                    <a href="https://drive.google.com/uc?export=download&id=1gH5ZBnId2zSfQRy9ldvXrgeRwWOc16e6" class="btn-secondary" target="_blank" rel="noopener">
+                    <!--<a href="https://drive.google.com/uc?export=download&id=1gH5ZBnId2zSfQRy9ldvXrgeRwWOc16e6"
+                        class="btn-secondary" target="_blank" rel="noopener">
                         Download My CV <span>⬇️</span>
-                    </a>
+                    </a>-->
                 </div>
 
                 <div class="hero-tags">
@@ -1031,77 +112,135 @@
 
             <div class="filter-row">
                 <button class="filter-btn active" data-filter="all">All ☕</button>
+                <button class="filter-btn" data-filter="pc">Desktop/PC</button>
                 <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="pc">PC / Desktop</button>
                 <button class="filter-btn" data-filter="prototype">Prototypes</button>
             </div>
 
             <div class="project-grid" id="projectGrid">
                 <!-- Project 1 -->
-                <article class="project-card" data-type="pc" data-link="https://your-demo-link.com">
-                    <div class="project-thumb">
-                        <div class="project-tag"><span>🌱</span> Cozy Farming</div>
-                        Imagine a screenshot of your farm game here.
+                <article class="project-card" data-type="mobile"
+                    data-link="https://drive.google.com/file/d/1xZHgIJp3Fmf9YANbVmnFEV9_fFPL7t2L/view?usp=drive_link">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #f6e8da, #ffd3b6, #f9a9b1, #d7b7e8);">
+                        <div class="project-tag"><span>🐱</span> Hyper Casual</div>
+                        Cat Throw.
                     </div>
                     <div class="project-body">
-                        <h3>Cozy Farm Builder</h3>
-                        <p>A relaxing farming experience with day &amp; night cycle and gentle music.</p>
+                        <h3>Cat Throw</h3>
+                        <p>A funny hyper casual game with adorable cats.</p>
                         <div class="project-meta">
                             <span class="meta-pill">Unity 3D</span>
-                            <span class="meta-pill">C#</span>
-                            <span class="meta-pill">Scriptable Objects</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <span class="text-inline">
-                            Play Demo <span>↗</span>
-                        </span>
-                        <span>Role: Gameplay &amp; UI</span>
-                    </div>
-                </article>
-
-                <!-- Project 2 -->
-                <article class="project-card" data-type="mobile" data-link="https://your-demo-link.com">
-                    <div class="project-thumb" style="background: linear-gradient(135deg,#c2e9fb,#a1c4fd);">
-                        <div class="project-tag"><span>🧩</span> Puzzle</div>
-                        Placeholder for a mobile puzzle game preview.
-                    </div>
-                    <div class="project-body">
-                        <h3>Coffee Break Puzzles</h3>
-                        <p>Short, satisfying levels designed for quick coffee-break sessions.</p>
-                        <div class="project-meta">
-                            <span class="meta-pill">Unity 2D</span>
                             <span class="meta-pill">Mobile</span>
-                            <span class="meta-pill">Level Design Tools</span>
+                            <span class="meta-pill">Released</span>
                         </div>
                     </div>
                     <div class="project-footer">
-                        <span class="text-inline">
-                            Google Play (soon) <span>☕</span>
-                        </span>
-                        <span>Role: Systems &amp; Tools</span>
+                        <span class="text-inline">See Demo <span>↗</span></span>
+                        <span>Role: Gameplay &amp; VFX</span>
                     </div>
                 </article>
-
-                <!-- Project 3 -->
-                <article class="project-card" data-type="prototype" data-link="https://your-demo-link.com">
-                    <div class="project-thumb" style="background: linear-gradient(135deg,#fbc2eb,#a18cd1);">
-                        <div class="project-tag"><span>🎮</span> Prototype</div>
-                        Concept art / prototype for a narrative café sim.
+                <!-- Project 2 -->
+                <article class="project-card" data-type="mobile"
+                    data-link="https://www.youtube.com/watch?v=gWBLeduPwA0">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #ceddf6, #a9c8f1, #86b4e8);">
+                        <div class="project-tag"><span>📲</span> NFT</div>
+                        GOGHLAND.
                     </div>
                     <div class="project-body">
-                        <h3>Café Stories Prototype</h3>
-                        <p>A narrative prototype about running a cozy café and listening to stories.</p>
+                        <h3>Gogh Land</h3>
+                        <p>A relaxing social simulation game about music, DJ &amp; performance design.</p>
                         <div class="project-meta">
-                            <span class="meta-pill">Dialogue System</span>
-                            <span class="meta-pill">Unity UI</span>
-                            <span class="meta-pill">Story Tools</span>
+                            <span class="meta-pill">Unity 3D</span>
+                            <span class="meta-pill">Mobile</span>
+                            <span class="meta-pill">Prototype</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-inline">See Demo <span>↗</span></span>
+                        <span>Role: Gameplay, Timeline &amp; UI</span>
+                    </div>
+                </article>
+                <!-- Project 3 -->
+                <article class="project-card" data-type="prototype mobile"
+                    data-link="https://www.youtube.com/shorts/usrjGYvx9xo">
+                    <div class="project-thumb" style="background: linear-gradient(135deg,#fbc2eb,#a18cd1);">
+                        <div class="project-tag"><span>🎶</span> Rhythm</div>
+                        Prototype Rhythm Game.
+                    </div>
+                    <div class="project-body">
+                        <h3>Prototype Rhythm Game</h3>
+                        <p>A rhythm game insprired by Japanese champagne call services.</p>
+                        <div class="project-meta">
+                            <span class="meta-pill">Unity 3D</span>
+                            <span class="meta-pill">Mobile</span>
+                            <span class="meta-pill">Prototype</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-inline">See Demo <span>↗</span></span>
+                        <span>Role: Gameplay, UI &amp; VFX</span>
+                    </div>
+                </article>
+                <!-- Project 4 -->
+                <article class="project-card" data-type="pc"
+                    data-link="https://store.steampowered.com/app/2561170/HotDog_TD/">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #ffe7c5, #ffd59f, #ffb874);">
+                        <div class="project-tag"><span>🏰</span> Tower Defense</div>
+                        HotDogTD.
+                    </div>
+                    <div class="project-body">
+                        <h3>HotDogTD</h3>
+                        <p>A tower defense game about hotdogs invading planet earth.</p>
+                        <div class="project-meta">
+                            <span class="meta-pill">Unity 3D</span>
+                            <span class="meta-pill">PC</span>
+                            <span class="meta-pill">Released</span>
                         </div>
                     </div>
                     <div class="project-footer">
                         <span class="text-inline">
-                            View on GitHub <span>💻</span>
+                            Steam <span>🎮</span>
                         </span>
+                        <span>Role: UI Improvement, Optimization &amp; Gamebalancing</span>
+                    </div>
+                </article>
+                <!-- Project 5 -->
+                <article class="project-card" data-type="mobile prototype" data-link="">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #e7dbff, #ccb8f5, #b198e6);"">
+                        <div class="project-tag"><span>🌎</span> Social simulation</div>
+                        Social Simulation Game.
+                    </div>
+                    <div class="project-body">
+                        <h3>Social Simulation Game</h3>
+                        <p>Social Simulation Game.</p>
+                        <div class="project-meta">
+                            <span class="meta-pill">Unity 3D</span>
+                            <span class="meta-pill">Mobile</span>
+                            <span class="meta-pill">In-Progress</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-inline">Release soon <span>🕓</span></span>
+                        <span>Role: Feature Implementation &amp; UI</span>
+                    </div>
+                </article>
+                <!-- Project 6 -->
+                <article class="project-card" data-type="mobile prototype" data-link="https://your-demo-link.com">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #dce7f3, #c6e7e2, #a4d4c9);">
+                        <div class="project-tag"><span>⚔️</span> Timing Combat</div>
+                        Prototype Timing Combat Game.
+                    </div>
+                    <div class="project-body">
+                        <h3>Prototype Timing Combat Game</h3>
+                        <p>A narrative prototype about a timing combat system (Attack/Block/Dodge).</p>
+                        <div class="project-meta">
+                            <span class="meta-pill">Unity 3D</span>
+                            <span class="meta-pill">Mobile</span>
+                            <span class="meta-pill">Prototype</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-inline">See Demo <span>↗</span></span>
                         <span>Role: Everything</span>
                     </div>
                 </article>
@@ -1120,19 +259,20 @@
             <div class="about">
                 <div class="about-text">
                     <p>
-                        I love designing and implementing gameplay systems that feel intuitive and satisfying.
-                        Most of my work lives in Unity and C#, where I focus on data-driven architecture,
-                        Scriptable Objects, and tools that make development smoother for the whole team.
+                        I am a Developer with over 3 years of experience in game development using the Unity
+                        Engine. I have gained extensive experience working on and developing games for Android
+                        and iOS platforms during this time.
                     </p>
                     <p>
-                        My projects range from farming sims and puzzle games to experimental prototypes.
-                        No matter the genre, I try to keep the vibes relaxed, polished, and welcoming.
+                        With a passion for programming environments and game development, I thoroughly enjoy the
+                        process of creating and building games that bring joy to others. I also have a strong desire to
+                        learn and enhance my knowledge of new technologies to apply them in improving projects
+                        and becoming a better developer.
                     </p>
 
                     <ul class="about-list">
                         <li><span class="icon">🎮</span><span>Gameplay Programming (2D &amp; 3D)</span></li>
                         <li><span class="icon">🧠</span><span>State Machines &amp; basic AI logic</span></li>
-                        <li><span class="icon">🔧</span><span>Editor Tools &amp; Pipelines</span></li>
                         <li><span class="icon">📦</span><span>Scriptable Object Architecture</span></li>
                         <li><span class="icon">🎨</span><span>Game UI / UX Implementation</span></li>
                         <li><span class="icon">🚀</span><span>Optimization &amp; Profiling essentials</span></li>
@@ -1142,9 +282,6 @@
                 <aside class="about-card">
                     <div class="about-avatar">👨‍💻</div>
                     <h3>Working from a cozy corner</h3>
-                    <p class="about-small">
-                        Imagine this as your avatar or stylized illustration later.
-                    </p>
                     <p class="about-small" style="margin-top:0.8rem;">
                         I’m always open to collaborations, prototypes, or helping to bring a soft,
                         welcoming tone into your next game.
@@ -1239,82 +376,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Year
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        // Mobile nav
-        const burger = document.getElementById("burger");
-        const nav = document.getElementById("nav");
-        burger.addEventListener("click", () => {
-            nav.classList.toggle("open");
-        });
-        nav.querySelectorAll("a").forEach(a =>
-            a.addEventListener("click", () => nav.classList.remove("open"))
-        );
-
-        // Simple project filter
-        const filterButtons = document.querySelectorAll(".filter-btn");
-        const cards = document.querySelectorAll(".project-card");
-
-        filterButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const filter = btn.dataset.filter;
-                filterButtons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-
-                cards.forEach(card => {
-                    const type = card.dataset.type;
-                    const show = filter === "all" || filter === type;
-                    card.style.display = show ? "flex" : "none";
-                });
-            });
-        });
-    </script>
-    <script>
-        const form = document.getElementById("contactForm");
-
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault(); // Stop redirect
-
-            const data = new FormData(form);
-
-            const response = await fetch(form.action, {
-                method: form.method,
-                body: data,
-                headers: { "Accept": "application/json" }
-            });
-
-            if (response.ok) {
-                showToast("☕ Message sent! I’ll reply soon.");
-                form.reset();
-            } else {
-                showToast("⚠️ Something went wrong. Try again?", true);
-            }
-        });
-
-        function showToast(message, error = false) {
-            const toast = document.createElement("div");
-            toast.textContent = message;
-            toast.className = "form-toast" + (error ? " form-toast-error" : "");
-            document.body.appendChild(toast);
-            setTimeout(() => toast.classList.add("show"));
-            setTimeout(() => toast.classList.remove("show"), 3200);
-            setTimeout(() => toast.remove(), 3600);
-        }
-    </script>
-    <script>
-        document.querySelectorAll(".project-card").forEach(card => {
-            card.addEventListener("click", (e) => {
-                // ignore clicks on inner buttons/links
-                if (e.target.tagName.toLowerCase() === "a") return;
-
-                const url = card.dataset.link;
-                if (url) window.open(url, "_blank");
-            });
-        });
-    </script>
 </body>
 
 </html>
