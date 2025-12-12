@@ -489,6 +489,69 @@ section {
     gap: 0.9rem;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
     cursor: pointer;
+    position: relative;
+}
+
+/* Floating cozy bubble */
+.project-bubble {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 90%;
+    padding: 0.9rem 1.1rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s cubic-bezier(.25, .8, .25, 1);
+}
+
+/* Text inside bubble */
+.project-bubble h4 {
+    margin: 0 0 0.35rem 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.project-bubble ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    opacity: 0.9;
+}
+
+/* Bubble appears on hover */
+.project-card:hover .project-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+        0 0 12px rgba(62, 183, 160, 0.25);
+}
+
+.project-card:hover .project-bubble {
+    animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-4px);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 .project-card:hover {
@@ -578,7 +641,7 @@ section {
 }
 
 .project-footer span:first-child {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .text-inline {
